@@ -1,0 +1,22 @@
+name: Jira Sync
+on:
+  issues:
+    types: [opened, labeled, unlabeled]
+  issue_comment:
+    types: [created]
+jobs:
+  sync:
+    name: Sync Items
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Sync
+        uses: ./.github/actions/github-action-issue-to-jira
+        env:
+          GITHUB_TOKEN: xxx
+        with:
+          jiraHost: jira.xxx.com
+          jiraUsername: xxx
+          jiraPassword: xxx
+          project: xxx
+          assignee: xxx
